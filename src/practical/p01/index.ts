@@ -1,25 +1,30 @@
 import axios from "axios";
-import { get } from "node:http";
 
-const res = await axios.get("https://jsonplaceholder.typicode.com/users");
+type Address = {
+  street: string;
+  suite: string;
+  city: string;
+  zipcode: string;
+  geo: {
+    lat: string;
+    lng: string;
+  };
+};
+
 type User = {
   id: number;
   name: string;
   phone: string;
-  address: {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string;
-    geo: {
-      lat: string;
-      lng: string;
-    };
-  }
-}
+  address: Address;
+};
 
-export function getPostalAddress(user: User): string {
-  return `${user.address.street}, ${user.address.suite}, ${user.address.city}, ${user.address.zipcode}`;
-}
+export async function getPostalAddress(): Promise<User[]> {
+  const res = await axios.get("https://jsonplaceholder.typicode.com/users");
 
-getPostalAddress();
+  return res.data.map((user: any) => ({
+    id: user.id,
+    name: user.name,
+    phone: user.phone,
+    address: user.address,
+  }));
+}
