@@ -28,21 +28,9 @@ export async function addUser(newUserData: any): Promise<UserResult> {
     id: lastId + 1,
     name: newUserData.name ?? null,
     phone: newUserData.phone ?? null,
-    address: newUserData.address
-      ? {
-          street: newUserData.address.street ?? null,
-          suite: newUserData.address.suite ?? null,
-          city: newUserData.address.city ?? null,
-          zipcode: newUserData.address.zipcode ?? null,
-          geo: newUserData.address.geo
-            ? {
-                lat: newUserData.address.geo.lat ?? null,
-                lng: newUserData.address.geo.lng ?? null,
-              }
-            : null,
-        }
-      : null,
-  };
+    address: newUserData.address ?? null,
+  
+  }
 }
 
 
