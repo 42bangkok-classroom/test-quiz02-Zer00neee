@@ -24,13 +24,12 @@ export async function addUser(newUserData: any): Promise<UserResult> {
 
   const lastId = users.length > 0 ? users[users.length - 1].id : 0;
 
-  return {
-    id: lastId + 1,
-    name: newUserData.name ?? null,
-    phone: newUserData.phone ?? null,
-    address: newUserData.address ?? null,
-  
-  }
+  return res.data.map((user: any) => ({
+    id: user.id,
+    name: user.name ?? null,
+    phone: user.phone ?? null,
+    address: user.address ?? null, 
+  }));
 }
 
 
