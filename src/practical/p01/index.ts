@@ -15,7 +15,7 @@ type User = {
   id: number;
   name: string;
   phone: string;
-  address: Address;
+  address: Address | null;
 };
 
 export async function getPostalAddress(): Promise<User[]> {
@@ -25,6 +25,6 @@ export async function getPostalAddress(): Promise<User[]> {
     id: user.id,
     name: user.name,
     phone: user.phone,
-    address: user.address,
+    address: user.address ?? null, 
   }));
 }
